@@ -2,7 +2,7 @@ package com.y3.mini.user;
 
 public class UserDTO {
 	
-	private String ID;
+	private String id;
 	private String pwd;
 	private String name;
 	private int count;
@@ -10,18 +10,18 @@ public class UserDTO {
 
 	public UserDTO() {}
 
-	public UserDTO(String iD, String pwd, String name) {
+	public UserDTO(String id, String pwd, String name) {
 		super();
-		ID = iD;
+		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
 	}
 
 	public String getID() {
-		return ID;
+		return id;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String id) {
+		this.id = id;
 	}
 	public String getPwd() {
 		return pwd;
@@ -50,7 +50,7 @@ public class UserDTO {
 
 	@Override
 	public String toString() {
-		return "회원정보 [ID=" + ID + ", pwd=" + pwd + ", 이름=" + name + ", 퀴즈횟수=" + count + ", 누적점수=" + sore + "]";
+		return "회원정보 [id=" + id + ", pwd=" + pwd + ", 이름=" + name + ", 퀴즈횟수=" + count + ", 누적점수=" + sore + "]";
 	}
 	
 	
