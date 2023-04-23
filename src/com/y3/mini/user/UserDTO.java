@@ -2,11 +2,11 @@ package com.y3.mini.user;
 
 public class UserDTO {
 	
-	private String id;
-	private String pwd;
-	private String name;
-	private int count;
-	private int sore;
+	private String id; 		//아이디
+	private String pwd;		//비밀번호 
+	private String name;	//이름 
+	private int count;		//퀴즈 푼 횟수
+	private int score;		//누적 점수 
 
 	public UserDTO() {}
 
@@ -41,16 +41,16 @@ public class UserDTO {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public int getSore() {
-		return sore;
+	public int getScore() {
+		return score;
 	}
-	public void setSore(int sore) {
-		this.sore = sore;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	@Override
 	public String toString() {
-		return "회원정보 [id=" + id + ", pwd=" + pwd + ", 이름=" + name + ", 퀴즈횟수=" + count + ", 누적점수=" + sore + "]";
+		return "회원정보 [id=" + id + ", pwd=" + pwd + ", 이름=" + name + ", 퀴즈 푼 횟수=" + count + ", 누적 점수=" + score + "]";
 	}
 	
 	
