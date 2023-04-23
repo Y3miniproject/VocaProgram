@@ -66,12 +66,12 @@ public class Menu {
 			break;
 		}
 		switch(n) {
-		case 1: user.showMypage(id);break; //매니저:print하는 메소드 매개변수는 String id    // 로그인한 id의 정보 출력
-//		case 2: voca.selectAll();break;//book 단어장 호출
-//		case 3: voca.seachWord();break;//단어매니저 : 단어검색후 프린트하는 메소드 구현
-//		case 4: voca.addWord();break;//단어매니저 : 단어와 단어 관련 정보 추가
-//		case 5: voca.deletWord();break;//단어매니저 : 단어 삭제
-		case 6: quiz.playQuiz(id,user,voca);break;//quiz
+		case 1: user.showMypage(id);break; 
+		case 2: voca.selectAll();break;
+		case 3: voca.searchWord(sc);break;
+		case 4: voca.addWord();break;
+		case 5: voca.deleteWord(sc);break;
+		case 6: quiz.playQuiz(id,user,voca);break;
 		default: System.out.println("번호를 잘못입력했습니다");
 		
 	
