@@ -7,60 +7,73 @@ import java.util.Scanner;
 public class VocaManager {
 	
 	
-	
 	public List<VocaDTO> vocalist = new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
 	
 	
 	
-	//단어장 호출
-	public void selectAll() {
-	    if (vocalist.isEmpty()) {
-	        System.out.println("현재 단어장에 등록된 단어가 없습니다.");
-	        return;
-	    }
-
-	    System.out.println("========단어장========");  
-	    for (VocaDTO voca : vocalist) {
-	        System.out.println("영단어 : " + voca.getWord());
-	        System.out.println("한국어 : " + voca.getKormean());
-	        System.out.println("영어정의 : " + voca.getDefinition());
-	        System.out.print("유의어 : ");
-	        for (String similar : voca.getSimilar()) {
-	            System.out.print(similar + " ");
-	        }
-	        System.out.println();
-	        System.out.println("------------------");
-	    }
+	//단어장 조회
+	public void showVoca() {
+		if(vocalist.isEmpty()) {
+			System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
+			return;
+		}
+		System.out.println("=====단어장======"); //출력형태 둘 중 선택
+		
+//		for(VocaDTO v : vocalist) {
+//			System.out.println("영단어 : " + v.getWord());
+//			System.out.println("한국어뜻 : " + v.getKormean());
+//			System.out.println("영어정의 : " + v.getDefinition());
+//			System.out.print("유의어 : ");
+//			for(String s : v.getSmiliar()) {
+//				System.out.print(s + " ");
+//			}
+//			
+//		    System.out.println("----------------"); 
+//		}
+		
+		for(VocaDTO v : vocalist) {
+			System.out.println(v.toString());
+			System.out.println("-----------------");
+		}
 	}
 	
 	
 	//단어검색 - 영단어, 한국어뜻 검색
-	public void searchWord(Scanner sc) {
-		
-		System.out.print("검색하려는 단어를 입력하세요 : ");
-		String word = sc.next();
-		
-	    for (VocaDTO v : vocalist) {
-	        if (v.getWord().equals(word)) {
-	            System.out.println(v.toString());
-	            return;
-	        }
-	        if (v.getKormean().equals(word)) {
-	        	System.out.println(v.toString());
-	        	return;
-	        }
-	    }
-	    
-	    if(!(vocalist.contains(word))) {
-	    	System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
-	    }
-
-	}
+		public void searchWord() { 
+			
+			if(vocalist.isEmpty()) {
+				System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
+				return;
+			}
+			
+			System.out.println("검색하려는 단어를 입력하세요 : ");
+			String word = sc.nextLine();
+			
+			for(VocaDTO v : vocalist) { 
+				if(v.getWord().equals(word) || v.getKormean().equals(word)) {
+//					System.out.println(v.toString()); //간단히 조회
+					System.out.println("영단어 : " + v.getWord());
+					System.out.println("한국어뜻 : " + v.getKormean());
+					System.out.println("영어정의 : " + v.getDefinition());
+					System.out.print("유의어 : ");
+					for(String s : v.getSimilar()) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+					return;
+					
+				}
+			} 
+			if(!(vocalist.contains(word))) { 
+		    	System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
+		    }
+			
+		}
 	
 	
 	
-	//단어와 단어 관련 정보 추가
+	//단어추가
 	public void addWord() {
 		 System.out.print("영단어 입력 : ");
 		    String word = sc.nextLine();
@@ -81,22 +94,32 @@ public class VocaManager {
 		    vocalist.add(voca);
 		    
 		    System.out.println("단어 등록 완료!");
+		    
+		    System.out.println("---새로 추가된 단어---");
+		    System.out.println(voca.toString());
+		    System.out.println("-------------------");
+		    
 	}
 	
 	//단어 삭제
-	public void deleteWord(Scanner sc) {
+	public void deleteWord() {
 		
-		System.out.print("삭제할 영단어 입력 : ");
-        String word = sc.next();
+		if(vocalist.isEmpty()) {
+			System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
+			return;
+		}
 		
-		for (VocaDTO v : vocalist) {
-	        if (v.getWord().equals(word)) {
-	        	vocalist.remove(v);
-	        	System.out.println(word + "이/가 단어장에서 삭제되었습니다.");
-	            return;
-	        }
-	    }
-	    System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
+		System.out.println("삭제할 단어 : ");
+		String word = sc.nextLine();
+		
+		for(VocaDTO v : vocalist) {
+			if(v.getWord().equals(word) || v.getKormean().equals(word)) {
+				vocalist.remove(v); 
+				System.out.println(word + "이/가 단어장에서 삭제되었습니다.");
+				return;
+			}
+		}
+		System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
 		
 	}
 
