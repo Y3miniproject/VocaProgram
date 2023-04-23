@@ -7,7 +7,7 @@ public class VocaDTO {
 	private String word;
 	private String kormean;
 	private String definition;
-	private String[] similar; //유의어를 두개저장
+	private String[] similar;
 	
 	public VocaDTO() {}
 	
