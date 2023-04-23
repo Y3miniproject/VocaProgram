@@ -16,41 +16,41 @@ public class VocaManager {
 	//단어장 호출
 	public void selectAll() {
 	    if (vocalist.isEmpty()) {
-	        System.out.println("등록된 단어가 없습니다.");
+	        System.out.println("현재 단어장에 등록된 단어가 없습니다.");
 	        return;
 	    }
 
 	    System.out.println("=====단어장=====");
 	    for (VocaDTO voca : vocalist) {
 	        System.out.println("영단어 : " + voca.getWord());
-	        System.out.println("한국어 뜻 : " + voca.getKormean());
-	        System.out.println("영어 정의 : " + voca.getDefinition());
+	        System.out.println("한국어 : " + voca.getKormean());
+	        System.out.println("영어정의 : " + voca.getDefinition());
 	        System.out.print("유의어 : ");
 	        for (String similar : voca.getSimilar()) {
 	            System.out.print(similar + " ");
 	        }
-	        System.out.println("");
+	        System.out.println();
 	    }
 	}
 	
 	
-	//단어검색 - 오류 수정하기
-	public VocaDTO searchWord(Scanner sc) {
+	//단어검색
+	public void searchWord(Scanner sc) {
 		
 		System.out.print("검색하려는 영단어를 입력하세요 : ");
-		String word = sc.nextLine();
+		String word = sc.next();
 		
 	    for (VocaDTO v : vocalist) {
 	        if (v.getWord().equals(word)) {
 	            System.out.println(v.toString());
-	            return v;
+	            return;
 	        }
 	    }
-
-	    System.out.println("입력하신 단어 " + word + " 은/는 단어장에 등록되지 않은 단어입니다.");
-
 	    
-	    return null;
+	    if(!(vocalist.contains(word))) {
+	    	System.out.println("입력하신 단어 " + word + " 은/는 단어장에 등록되지 않은 단어입니다.");
+	    }
+
 	}
 	
 	
@@ -75,14 +75,14 @@ public class VocaManager {
 		    VocaDTO voca = new VocaDTO(word, kormean, engdefinition, new String[]{similar1, similar2});
 		    vocalist.add(voca);
 		    
-		    System.out.println("단어 등록 완료");
+		    System.out.println("단어 등록 완료!");
 	}
 	
 	//단어 삭제
 	public void deleteWord(Scanner sc) {
 		
 		System.out.print("삭제할 영단어 입력 : ");
-        String word = sc.nextLine();
+        String word = sc.next();
 		
 		for (VocaDTO v : vocalist) {
 	        if (v.getWord().equals(word)) {
