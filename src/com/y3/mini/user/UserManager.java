@@ -51,8 +51,8 @@ public class UserManager {
 		}
 	}
 	
-	// 회원가입 기능을 위한 singUp() 메소드를 작성하여 사용자 정보를 저장하고 회원가입 결과를 반환
-	public boolean singUp(String id, String pwd, String name) {
+	// 회원가입 기능을 위한 signUp() 메소드를 작성하여 사용자 정보를 저장하고 회원가입 결과를 반환
+	public boolean signUp(String id, String pwd, String name) {
 		if(userInfo.containsKey(id)) {
 			System.out.println("이미 존재하는 아이디 입니다.");
 			return false;

@@ -42,7 +42,7 @@ public class Menu {
 				System.out.print("이름 : ");
 				name = sc.nextLine();
 				
-				if(!user.singUp(id, pwd, name))
+				if(!user.signUp(id, pwd, name))
 					System.out.println("회원가입에 실패했습니다");
 				// 매니저:id, pwd, name으로 메소드 만들고 생성성공여부에 따라 true/false리턴
 			} else if (n.equals("3")) {
