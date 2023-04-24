@@ -24,9 +24,9 @@ public class Menu {
 			System.out.println("2. 회원가입");
 			System.out.println("3. 프로그램 종료");
 			System.out.print("번호 : ");
-			int n = sc.nextInt();
-			sc.nextLine();
-			if (n == 1) {
+			String n = sc.nextLine();
+//			sc.nextLine();
+			if (n.equals("1")) {
 				System.out.print("아이디 : ");
 				id = sc.nextLine();
 				System.out.print("비밀번호 : ");
@@ -35,7 +35,7 @@ public class Menu {
 					break;
 				}
 
-			} else if (n == 2) {
+			} else if (n.equals("2")) {
 				System.out.print("아이디 : ");
 				id = sc.nextLine();
 				System.out.print("비밀번호 : ");
@@ -44,7 +44,7 @@ public class Menu {
 				name = sc.nextLine();
 				user.singUp(id, pwd, name);
 				// 매니저:id, pwd, name으로 메소드 만들고 생성성공여부에 따라 true/false리턴
-			} else if (n == 3) {
+			} else if (n.equals("3")) {
 				System.out.println("프로그램을 종료하겠습니다");
 				return;
 			} else {
@@ -61,18 +61,19 @@ public class Menu {
 			System.out.println("5. 단어 삭제");
 			System.out.println("6. 퀴즈 풀기");
 			System.out.println("7. 종료하기");
-			int n = sc.nextInt();
-			if (n == 7) {
+			System.out.print("메뉴 번호: ");
+			String n = sc.nextLine();
+			if (n.equals("7")) {
 				System.out.println("프로그램을 종료하겠습니다.");
 				break;
 			}
 			switch (n) {
-			case 1 : user.showMypage(id); break;
-			case 2 : voca.showVoca();; break; 
-			case 3 : voca.searchWord(); break;
-			case 4 : voca.addWord(); break;
-			case 5 : voca.deleteWord(); break;
-//			case 6 : quiz.playquiz(id,user,voca) break;
+			case "1" : user.showMypage(id); break;
+			case "2" : voca.showVoca();; break; 
+			case "3" : voca.searchWord(); break;
+			case "4" : voca.addWord(); break;
+			case "5" : voca.deleteWord(); break;
+//			case "6" : quiz.playquiz(id,user,voca) break;
 			default : System.out.println("번호를 잘못입력했습니다"); break;
 		}
 		}
