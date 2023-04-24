@@ -30,7 +30,7 @@ public class Menu {
 				id = sc.nextLine();
 				System.out.print("비밀번호 : ");
 				pwd = sc.nextLine();
-				if (isLogin = user.signIn(id, pwd)) {// 매니저: 로그인성공여부를 true/false리턴받고 프린트 // id가 있어야지 후에 퀴즈풀때 점수추가할려면 필요함
+				if (isLogin = user.signIn(id, pwd)) {
 					break;
 				}
 
@@ -44,7 +44,7 @@ public class Menu {
 				
 				if(!user.signUp(id, pwd, name))
 					System.out.println("회원가입에 실패했습니다");
-				// 매니저:id, pwd, name으로 메소드 만들고 생성성공여부에 따라 true/false리턴
+				
 			} else if (n.equals("3")) {
 				System.out.println("프로그램을 종료하겠습니다");
 				return;
