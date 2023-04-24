@@ -9,7 +9,7 @@ import com.y3.mini.voca.VocaManager;
 public class Menu {
 	UserManager user = new UserManager();
 	VocaManager voca = new VocaManager();
-	Quiz quiz;
+	Quiz quiz = new Quiz();
 	Scanner sc = new Scanner(System.in);
 	String id;
 	String pwd;
@@ -19,13 +19,12 @@ public class Menu {
 	public void mainMenu() {
 
 		while (true) {
-			System.err.println("단어장에 접속했습니다");
+			System.out.println("단어장에 접속했습니다");
 			System.out.println("1. 로그인");
 			System.out.println("2. 회원가입");
 			System.out.println("3. 프로그램 종료");
 			System.out.print("번호 : ");
 			String n = sc.nextLine();
-//			sc.nextLine();
 			if (n.equals("1")) {
 				System.out.print("아이디 : ");
 				id = sc.nextLine();
@@ -42,7 +41,9 @@ public class Menu {
 				pwd = sc.nextLine();
 				System.out.print("이름 : ");
 				name = sc.nextLine();
-				user.singUp(id, pwd, name);
+				
+				if(!user.singUp(id, pwd, name))
+					System.out.println("회원가입에 실패했습니다");
 				// 매니저:id, pwd, name으로 메소드 만들고 생성성공여부에 따라 true/false리턴
 			} else if (n.equals("3")) {
 				System.out.println("프로그램을 종료하겠습니다");
@@ -73,7 +74,7 @@ public class Menu {
 			case "3" : voca.searchWord(); break;
 			case "4" : voca.addWord(); break;
 			case "5" : voca.deleteWord(); break;
-//			case "6" : quiz.playquiz(id,user,voca) break;
+			case "6" : quiz.playQuiz(id,user,voca); break;
 			default : System.out.println("번호를 잘못입력했습니다"); break;
 		}
 		}
