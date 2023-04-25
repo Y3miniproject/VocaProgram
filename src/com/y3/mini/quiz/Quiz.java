@@ -48,7 +48,6 @@ public class Quiz {
 	//	영단어 제시 후 영어정의 선택지 3가지 중 정답 맞추는 객관식 퀴즈
 	public boolean meanProblem(VocaManager voca) {
 		String s;
-		String word;
 		boolean isSuccess = false;
 		Set<VocaDTO> vocaSet = new HashSet<>();
 		while(vocaSet.size()<3) {
