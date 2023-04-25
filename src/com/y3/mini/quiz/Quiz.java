@@ -14,6 +14,10 @@ public class Quiz {
 	public void playQuiz(String id,UserManager user,VocaManager voca) {
 		int score = 0;			// 현재 점수
 		int cnt = 0;			// 현재 문제 푼 횟수
+		if(voca.vocalist.size()<3) {
+			System.out.println("단어장에 단어가 부족합니다. 단어를 추가하세요");
+			return;
+		}
 		while(true) {
 			System.out.println("****퀴즈*****");
 			System.out.println("1. 뜻 맞추기");
