@@ -12,30 +12,34 @@ import com.y3.mini.voca.VocaManager;
 public class Quiz {
 	Scanner sc = new Scanner(System.in);
 	public void playQuiz(String id,UserManager user,VocaManager voca) {
-		int score = 0;
+		int score = 0;			// 현재 점수
+		int cnt = 0;			// 현재 문제 푼 횟수
 		while(true) {
 			System.out.println("****퀴즈*****");
 			System.out.println("1. 뜻 맞추기");
 			System.out.println("2. 단어 맞추기");
 			System.out.println("3. 퀴즈 종료");
+			System.out.print("번호 입력 : ");
 			String s = sc.nextLine();
 			if(s.equals("3")) {
 				System.out.println("퀴즈를 종료하겠습니다");
 				break;
 			}
 			switch(s) {
-			case "1":user.countUpdate(id);
+			case "1":user.countUpdate(id);cnt++;
 					 if(meanProblem(voca)) {
 						 score +=5; 
 					 }
 					 break;  // 성공시 5점
-			case "2":user.countUpdate(id);
+			case "2":user.countUpdate(id);cnt++;
 				     if(wordProblem(voca)) {
 				    	 score +=10;
 				     }
 				     break;  // 성공시 10점
 			default: System.out.println("번호를 잘못입력했습니다");
 			}
+			System.out.println("현재 문제 푼 횟수 : " + cnt);
+			System.out.println("현재 점수 : " + score);
 		}
 //		 객관식 퀴즈는 5점 배점, 주관식 퀴즈는 10점 배점		
 		user.addScore(id, score);
@@ -53,9 +57,9 @@ public class Quiz {
 		ArrayList<VocaDTO> vocaList = new ArrayList<>(vocaSet);
 	    VocaDTO answer = vocaList.get((int)(Math.random()*3));
 	    System.out.println(answer.getWord()+"의 뜻을 보기에서 골라주세요");
-	    System.out.println("1 . " + vocaList.get(0).getKormean());
-	    System.out.println("2 . " + vocaList.get(1).getKormean());
-	    System.out.println("3 . " + vocaList.get(2).getKormean());
+	    System.out.println("1 . " + vocaList.get(0).getDefinition());
+	    System.out.println("2 . " + vocaList.get(1).getDefinition());
+	    System.out.println("3 . " + vocaList.get(2).getDefinition());
 	    System.out.print("정답은 : ");
 	    s = sc.nextLine();
 	    switch(s) {
