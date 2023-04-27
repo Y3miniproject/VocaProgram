@@ -1,7 +1,10 @@
 package com.y3.mini.voca;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 public class VocaManager {
@@ -37,68 +40,100 @@ public class VocaManager {
 			System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
 			return;
 		}
+		
 
-//		// 영단어 오름차순 정렬
-//		List<VocaDTO> sortedList = new ArrayList<>(vocalist);
-//		sortedList.sort(new Comparator<VocaDTO>() {
-//
-//			@Override
-//			public int compare(VocaDTO o1, VocaDTO o2) {
-//				return o1.getWord().compareTo(o2.getWord());
-//			}
-//		});
+		// 영단어 오름차순 정렬
+		List<VocaDTO> sortedList = new ArrayList<>(vocalist);
+		sortedList.sort(new Comparator<VocaDTO>() {
 
-//		Iterator<VocaDTO> itr = sortedList.iterator();
-		Iterator<VocaDTO> itr = vocalist.iterator();
-
+			@Override
+			public int compare(VocaDTO o1, VocaDTO o2) {
+				return o1.getWord().compareTo(o2.getWord());
+			}
+		});
+		
 		System.out.println("=======단어장=======");
-		while (itr.hasNext()) {
-			System.out.println(itr.next().toString());
-			System.out.println("-----------------");
+		if (!sortedList.isEmpty()) {
+			
+			for(VocaDTO v : sortedList) {
+				System.out.println(v.toString());
+				System.out.println("-----------------");
+			}
 		}
 
 	}
 
-	// 단어검색 - 수정필요
+	
+	// 단어검색
 	public void searchWord() {
+	    while(true) {
+	        Iterator<VocaDTO> itr = vocalist.iterator();
+	        if (!itr.hasNext()) {
+	            System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
+	            return;
+	        }
 
-		while(true) {
-			
-			Iterator<VocaDTO> itr = vocalist.iterator();
-			if (!itr.hasNext()) {
-				System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
-				return;
-			}
-			
-			System.out.print("검색하려는 단어를 입력하세요 : ");
-			String word = sc.nextLine();
-			
-			while (itr.hasNext()) {  //출력문 중복실행되므로 수정필요
-				VocaDTO v = itr.next();
-				if (v.getWord().contains(word) || v.getKormean().contains(word)) {
-					System.out.println("영단어 : " + v.getWord());
-					System.out.println("한국어뜻 : " + v.getKormean());
-					System.out.println("영어정의 : " + v.getDefinition());
+	        System.out.print("검색할 단어를 입력하세요(영단어/한국어뜻) : ");
+	        String word = sc.nextLine();
+	        System.out.println();
+
+
+	        //전체 검색결과 수의 출력을 위해 임시HashSet 생성하여 복제
+	        int tmpCount = 0;
+	        HashSet<VocaDTO> tmpHashSet = new HashSet<VocaDTO>();
+	        tmpHashSet.addAll(vocalist);
+	        Iterator<VocaDTO> tmpItr = tmpHashSet.iterator();
+	        while(tmpItr.hasNext()) {
+	        	VocaDTO tmpVoca = tmpItr.next();
+	        	if(tmpVoca.getWord().contains(word) || tmpVoca.getKormean().contains(word)) {
+	        		tmpCount++;
+	        	}
+	        }
+	        System.out.println("=====================검색 완료=====================");
+	        System.out.println("총 " + tmpCount + "건이 검색되었습니다.");
+	        
+	        
+	        boolean isRegistered = false;
+	        int count = 0;
+	        while(itr.hasNext()) {
+	            VocaDTO voca = itr.next();
+	            
+	            if(voca.getWord().contains(word) || voca.getKormean().contains(word)) {
+	            	++count;
+	            	
+	                isRegistered = true;
+	                
+	                System.out.println("#" + count);
+					System.out.println("영단어 : " + voca.getWord());
+					System.out.println("한국어뜻 : " + voca.getKormean());
+					System.out.println("영어정의 : " + voca.getDefinition());
 					System.out.print("유의어 : ");
-					for (String s : v.getSimilar()) {
-						System.out.print(s + " ");
-					}
-					System.out.println();
-//					return;
-				} 
-			}
-			
-			System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
-			
-			System.out.print("계속 검색하시겠습니까?(y/n) : ");
-			String s = sc.nextLine();
-			
-			if(s.equalsIgnoreCase("n")) {
-				break;
-			}
-		
-		}//while
+	                for (String s : voca.getSimilar()) {
+	                    System.out.print(s + " ");
+	                }
+//	                break;  //검색어와 일치하는 단어 전부를 출력하기 위해서 주석처리
+	            }
+	            System.out.println();
+	        }
+	        
+	        
+	        if(!isRegistered) {
+	            System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
+	        }
+	        
+	        System.out.println("=============================================");
+	        System.out.println();
+	        System.out.print("계속 검색하시겠습니까?(y/n) : ");
+	        String s = sc.nextLine();
+
+	        if(s.equalsIgnoreCase("n")) {
+	            break;
+	        }
+	    }
 	}
+	
+	
+	
 
 	// 단어추가 - 수정필요
 	public void addWord() {
@@ -156,17 +191,6 @@ public class VocaManager {
 			}
 			
 			
-//			//HashSet으로 단어장을 변경하였으므로 Iterator를 통해 제거해야 ConcurrentModificationException예외 방지되므로 주석처리
-//			for (VocaDTO v : vocalist) {
-//				if (v.getWord().equals(word) || v.getKormean().equals(word)) {
-//					
-//					vocalist.remove(v);
-//					
-////					System.out.println(word + "이/가 단어장에서 삭제되었습니다.");
-////					return;
-//				}
-//			}
-			
 			System.out.println(input + " 은/는 단어장에 등록되지 않은 단어입니다.");
 			
 			
@@ -177,7 +201,7 @@ public class VocaManager {
 				break;
 			}
 			
-		}//while
+		}
 
 	}
 
