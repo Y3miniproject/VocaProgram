@@ -134,64 +134,6 @@ public class VocaManager {
 	
 	
 	
-	
-	//백업
-//	public void searchWord() {
-//	    while(true) {
-//	        Iterator<VocaDTO> itr = vocalist.iterator();
-//	        if (!itr.hasNext()) {
-//	            System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
-//	            return;
-//	        }
-//
-//	        System.out.print("검색할 단어를 입력하세요(영단어/한국어뜻) : ");
-//	        String word = sc.nextLine();
-//
-//	        boolean isRegistered = false;
-//	        int count = 0;
-//	        while(itr.hasNext()) {
-//	            VocaDTO voca = itr.next();
-//	            
-//	            if(voca.getWord().contains(word) || voca.getKormean().contains(word)) {
-//	            	count++;
-//	            	
-//	                isRegistered = true;
-//	                
-//	                System.out.println("#" + count);
-//	                
-//					System.out.println("영단어 : " + voca.getWord());
-//					System.out.println("한국어뜻 : " + voca.getKormean());
-//					System.out.println("영어정의 : " + voca.getDefinition());
-//					System.out.print("유의어 : ");
-//	                for (String s : voca.getSimilar()) {
-//	                    System.out.print(s + " ");
-//	                }
-////	                break;  //검색어와 일치하는 단어 전부를 출력하기 위해서 주석
-//	            }
-//	        }
-//	        System.out.println();
-//	        System.out.println("총 " + count + "건이 검색되었습니다.");
-//
-//	        if(!isRegistered) {
-//	            System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
-//	        }
-//	        
-//	        
-//	        System.out.println();
-//	        System.out.println();
-//	        System.out.print("계속 검색하시겠습니까?(y/n) : ");
-//	        String s = sc.nextLine();
-//
-//	        if(s.equalsIgnoreCase("n")) {
-//	            break;
-//	        }
-//	    }
-//	}
-	
-	
-	
-	
-	
 
 	// 단어추가 - 수정필요
 	public void addWord() {
