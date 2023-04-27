@@ -1,14 +1,13 @@
 package com.y3.mini.voca;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 public class VocaManager {
 
-	public List<VocaDTO> vocalist = new ArrayList<>();
+//	public List<VocaDTO> vocalist = new ArrayList<>();
+	public HashSet<VocaDTO> vocalist = new HashSet<>();
 	Scanner sc = new Scanner(System.in);
 	
 
@@ -39,17 +38,18 @@ public class VocaManager {
 			return;
 		}
 
-		// 영단어 오름차순 정렬
-		List<VocaDTO> sortedList = new ArrayList<>(vocalist);
-		sortedList.sort(new Comparator<VocaDTO>() {
+//		// 영단어 오름차순 정렬
+//		List<VocaDTO> sortedList = new ArrayList<>(vocalist);
+//		sortedList.sort(new Comparator<VocaDTO>() {
+//
+//			@Override
+//			public int compare(VocaDTO o1, VocaDTO o2) {
+//				return o1.getWord().compareTo(o2.getWord());
+//			}
+//		});
 
-			@Override
-			public int compare(VocaDTO o1, VocaDTO o2) {
-				return o1.getWord().compareTo(o2.getWord());
-			}
-		});
-
-		Iterator<VocaDTO> itr = sortedList.iterator();
+//		Iterator<VocaDTO> itr = sortedList.iterator();
+		Iterator<VocaDTO> itr = vocalist.iterator();
 
 		System.out.println("=======단어장=======");
 		while (itr.hasNext()) {
@@ -73,7 +73,6 @@ public class VocaManager {
 			System.out.print("검색하려는 단어를 입력하세요 : ");
 			String word = sc.nextLine();
 			
-			
 			while (itr.hasNext()) {  //출력문 중복실행되므로 수정필요
 				VocaDTO v = itr.next();
 				if (v.getWord().contains(word) || v.getKormean().contains(word)) {
@@ -88,6 +87,7 @@ public class VocaManager {
 //					return;
 				} 
 			}
+			
 			System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
 			
 			System.out.print("계속 검색하시겠습니까?(y/n) : ");
@@ -140,19 +140,34 @@ public class VocaManager {
 				return;
 			}
 			
-			showVoca();// for문(toString)을 showVoca()호출로 대체
+			showVoca();
 		
-			System.out.print("삭제할 단어를 입력하세요 : ");
-			String word = sc.nextLine();
-			
-			for (VocaDTO v : vocalist) {
-				if (v.getWord().equals(word) || v.getKormean().equals(word)) {
-					vocalist.remove(v);
-					System.out.println(word + "이/가 단어장에서 삭제되었습니다.");
-//					return;
+			System.out.print("삭제할 단어를 입력하세요(영단어/한국어뜻) : ");
+			String input = sc.nextLine();
+
+			while(itr.hasNext()) {
+				
+				VocaDTO willRemoved = itr.next();
+				
+				if(willRemoved.getWord().equals(input) || willRemoved.getKormean().equals(input)) {
+					itr.remove();
+					System.out.println(input + "이/가 단어장에서 삭제되었습니다.");
 				}
 			}
-			System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
+			
+			
+//			//HashSet으로 단어장을 변경하였으므로 Iterator를 통해 제거해야 ConcurrentModificationException예외 방지되므로 주석처리
+//			for (VocaDTO v : vocalist) {
+//				if (v.getWord().equals(word) || v.getKormean().equals(word)) {
+//					
+//					vocalist.remove(v);
+//					
+////					System.out.println(word + "이/가 단어장에서 삭제되었습니다.");
+////					return;
+//				}
+//			}
+			
+			System.out.println(input + " 은/는 단어장에 등록되지 않은 단어입니다.");
 			
 			
 			System.out.print("단어를 더 삭제하시겠습니까?(y/n) : ");

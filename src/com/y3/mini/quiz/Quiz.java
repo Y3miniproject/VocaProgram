@@ -2,6 +2,7 @@ package com.y3.mini.quiz;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -53,11 +54,17 @@ public class Quiz {
 	public boolean meanProblem(VocaManager voca) {
 		String s;
 		boolean isSuccess = false;
-		Set<VocaDTO> vocaSet = new HashSet<>();
-		while(vocaSet.size()<3) {
-			vocaSet.add(voca.vocalist.get((int)(Math.random()*voca.vocalist.size()))); 
-		}
-		ArrayList<VocaDTO> vocaList = new ArrayList<>(vocaSet);
+//		Set<VocaDTO> vocaSet = new HashSet<>();
+//		while(vocaSet.size()<3) {
+////		vocaSet.add(voca.vocalist.get((int)(Math.random()*voca.vocalist.size())));              //hy:원래 작성하셨던 코드입니다.
+//			vocaSet.add(((List<VocaDTO>) voca.vocalist).get((int)(Math.random()*voca.vocalist.size()))); //hy:(1)vocalist를 HashSet으로 변경하자 컴파일오류가 생겨 형변환한 코드입니다.
+//		}
+		//hy:(2)런타입에러 발생하여 HashSet객체생성과 while문을 주석처리
+		//원래는 ArrayList(인덱스)였기 때문에 Set으로 랜덤하게 저장한뒤 다시 새ArrayList(인덱스)에 담아 복사했던 코드라고 추측.
+		//이제는 단어장이 HashSet이기떄문에, 인덱스를 쓰기 위해 새 ArrayList복사한다
+		
+//		ArrayList<VocaDTO> vocaList = new ArrayList<>(vocaSet);       //hy:원래 작성하셨던 코드
+		ArrayList<VocaDTO> vocaList = new ArrayList<>(voca.vocalist); //hy:매개변수 수정
 	    VocaDTO answer = vocaList.get((int)(Math.random()*3));
 	    System.out.println(answer.getWord()+"의 뜻을 보기에서 골라주세요");
 	    System.out.println("1 . " + vocaList.get(0).getDefinition());
@@ -101,7 +108,13 @@ public class Quiz {
 	public boolean wordProblem(VocaManager voca) {
 		int ran = (int)(Math.random()*voca.vocalist.size()); // 영어단어장 사이즈만큼 랜덤 정수 만듬
 		boolean isSuccess = false;
-		VocaDTO vocaQ = voca.vocalist.get(ran);
+//		VocaDTO vocaQ = voca.vocalist.get(ran);                   //hy:원래 작성하셨던 코드입니다.
+//		VocaDTO vocaQ = ((List<VocaDTO>) voca.vocalist).get(ran); //hy:(1)vocalist를 HashSet으로 변경하자 컴파일오류가 생겨 형변환한 코드입니다. 
+		
+		//hy:(2)인덱스를 이용하기 위해 새ArrayList에 HashSet인 vocalist를 복사해 담기
+		ArrayList<VocaDTO> vocaList2 = new ArrayList<>(voca.vocalist);
+		VocaDTO vocaQ = vocaList2.get(ran); 
+		
 		System.out.print(vocaQ.getKormean()+" :  ");
 		String s = sc.nextLine();
 		if(s.equals(vocaQ.getWord())) {
