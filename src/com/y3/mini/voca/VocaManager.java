@@ -140,7 +140,7 @@ public class VocaManager {
 				return;
 			}
 			
-			showVoca();
+			showVoca();// for문(toString)을 showVoca()호출로 대체
 		
 			System.out.print("삭제할 단어를 입력하세요 : ");
 			String word = sc.nextLine();
