@@ -134,17 +134,14 @@ public class VocaManager {
 		
 		while(true) {
 			Iterator<VocaDTO> itr = vocalist.iterator();
+			
 			if (!itr.hasNext()) {
 				System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
 				return;
 			}
 			
-			System.out.println("=======단어 목록=======");
-			while (itr.hasNext()) {
-				System.out.println(itr.next().toString());
-				System.out.println("-----------------");
-			}
-			
+			showVoca();
+		
 			System.out.print("삭제할 단어를 입력하세요 : ");
 			String word = sc.nextLine();
 			
@@ -170,3 +167,5 @@ public class VocaManager {
 	}
 
 }
+
+
