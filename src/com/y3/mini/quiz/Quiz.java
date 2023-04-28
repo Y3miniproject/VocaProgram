@@ -11,8 +11,9 @@ import com.y3.mini.voca.VocaDTO;
 import com.y3.mini.voca.VocaManager;
 
 public class Quiz {
-	Scanner sc = new Scanner(System.in);
+	Scanner sc= new Scanner(System.in);;
 	public void playQuiz(String id,UserManager user,VocaManager voca) {
+	
 		int score = 0;			// 현재 점수
 		int cnt = 0;			// 현재 문제 푼 횟수
 		if(voca.vocalist.size()<3) {
@@ -47,6 +48,7 @@ public class Quiz {
 			System.out.println("현재 점수 : " + score);
 		}
 //		 객관식 퀴즈는 5점 배점, 주관식 퀴즈는 10점 배점		
+	
 		user.addScore(id, score);
 	}
 
@@ -54,17 +56,14 @@ public class Quiz {
 	public boolean meanProblem(VocaManager voca) {
 		String s;
 		boolean isSuccess = false;
-//		Set<VocaDTO> vocaSet = new HashSet<>();
-//		while(vocaSet.size()<3) {
-////		vocaSet.add(voca.vocalist.get((int)(Math.random()*voca.vocalist.size())));              //hy:원래 작성하셨던 코드입니다.
-//			vocaSet.add(((List<VocaDTO>) voca.vocalist).get((int)(Math.random()*voca.vocalist.size()))); //hy:(1)vocalist를 HashSet으로 변경하자 컴파일오류가 생겨 형변환한 코드입니다.
-//		}
-		//hy:(2)런타입에러 발생하여 HashSet객체생성과 while문을 주석처리
-		//원래는 ArrayList(인덱스)였기 때문에 Set으로 랜덤하게 저장한뒤 다시 새ArrayList(인덱스)에 담아 복사했던 코드라고 추측.
-		//이제는 단어장이 HashSet이기떄문에, 인덱스를 쓰기 위해 새 ArrayList복사한다
+		Set<VocaDTO> vocaSet = new HashSet<>();
+		ArrayList<VocaDTO> vocaL = new ArrayList<>(voca.vocalist);
 		
-//		ArrayList<VocaDTO> vocaList = new ArrayList<>(vocaSet);       //hy:원래 작성하셨던 코드
-		ArrayList<VocaDTO> vocaList = new ArrayList<>(voca.vocalist); //hy:매개변수 수정
+		while(vocaSet.size()<3) {
+		vocaSet.add(vocaL.get((int)(Math.random()*voca.vocalist.size())));             
+		}
+		
+		ArrayList<VocaDTO> vocaList = new ArrayList<>(vocaSet);
 	    VocaDTO answer = vocaList.get((int)(Math.random()*3));
 	    System.out.println(answer.getWord()+"의 뜻을 보기에서 골라주세요");
 	    System.out.println("1 . " + vocaList.get(0).getDefinition());
@@ -97,7 +96,6 @@ public class Quiz {
     	default:System.out.println("번호를 잘못입력했습니다");
     	
     }
-    	
 	    return isSuccess;
 }	
 	    
@@ -108,10 +106,6 @@ public class Quiz {
 	public boolean wordProblem(VocaManager voca) {
 		int ran = (int)(Math.random()*voca.vocalist.size()); // 영어단어장 사이즈만큼 랜덤 정수 만듬
 		boolean isSuccess = false;
-//		VocaDTO vocaQ = voca.vocalist.get(ran);                   //hy:원래 작성하셨던 코드입니다.
-//		VocaDTO vocaQ = ((List<VocaDTO>) voca.vocalist).get(ran); //hy:(1)vocalist를 HashSet으로 변경하자 컴파일오류가 생겨 형변환한 코드입니다. 
-		
-		//hy:(2)인덱스를 이용하기 위해 새ArrayList에 HashSet인 vocalist를 복사해 담기
 		ArrayList<VocaDTO> vocaList2 = new ArrayList<>(voca.vocalist);
 		VocaDTO vocaQ = vocaList2.get(ran); 
 		
