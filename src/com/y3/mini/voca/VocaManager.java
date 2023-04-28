@@ -12,8 +12,7 @@ public class VocaManager {
 	public HashSet<VocaDTO> vocalist = new HashSet<>();
 	Scanner sc = new Scanner(System.in);
 	
-
-
+	
     //초기 단어
 	public VocaManager() {
 		VocaDTO voca1 = new VocaDTO("benefit", "이익", "a good or helpful result or effect", new String[] {"abvantage", "profit"});
@@ -30,8 +29,6 @@ public class VocaManager {
 	}
 	
 	
-	
-
 	// 단어장 조회
 	public void showVoca() {
 
@@ -131,56 +128,113 @@ public class VocaManager {
 	}
 	
 	
-	
-
 	// 단어추가 - 수정필요
-	
 	
 	//중복저장 안되도록 
 	//중복된 영단어 입력시 안내문 출력과 함께 메소드를 나가도록 return 
 	//(추후 반복기능 추가할경우 break하여 영단어를 다시 입력하게함)
 	public void addWord() {
 	
-		System.out.print("영단어 입력 : ");
-		String word = sc.nextLine();
-		
-		HashSet<VocaDTO> tmpHashSet = new HashSet<VocaDTO>();
-        tmpHashSet.addAll(vocalist);
-        Iterator<VocaDTO> tmpItr = tmpHashSet.iterator();
-        while(tmpItr.hasNext()) {
-        	VocaDTO tmpVoca = tmpItr.next();
-        	if(tmpVoca.getWord().equals(word) || tmpVoca.getKormean().equals(word)) {
-        		System.out.println(word + "는 이미 등록된 단어입니다.");
-        		
-                //이미 등록된 해당 단어를 보여주기
-        		System.out.println("==================등록된 단어정보====================");
-        		System.out.println("영단어 : " + tmpVoca.getWord());
-				System.out.println("한국어뜻 : " + tmpVoca.getKormean());
-				System.out.println("영어정의 : " + tmpVoca.getDefinition());
-				System.out.print("유의어 : ");
-                for (String s : tmpVoca.getSimilar()) {
-                    System.out.print(s + " ");
-                }
-                System.out.println();
-                System.out.println("==================================================");
-                System.out.println();
-        		
-        		return;
-        	}
-        }	
-        
-        	
-		System.out.print("한국어 뜻 입력 : ");
-		String kormean = sc.nextLine();
-
-		System.out.print("영어 정의 입력 : ");
-		String engdefinition = sc.nextLine();
-
-		System.out.print("첫번째 유의어 : ");
-		String similar1 = sc.nextLine();
-
-		System.out.print("두번째 유의어 : ");
-		String similar2 = sc.nextLine();
+		//영단어 입력 유효성검사
+			String word = "";
+			while(true) {
+				
+				System.out.print("영단어 입력 : ");
+				word = sc.nextLine().trim(); 
+				
+				if(word.length() == 0) {
+					System.out.println("잘못 입력하셨습니다. 영단어를 다시 입력해주세요.");
+				}
+				else if(word.length() > 0) {
+					break; //영단어입력반복문을 끝낸다
+				}
+			}
+			
+			
+			HashSet<VocaDTO> tmpHashSet = new HashSet<VocaDTO>();
+			tmpHashSet.addAll(vocalist);
+			Iterator<VocaDTO> tmpItr = tmpHashSet.iterator();
+			while(tmpItr.hasNext()) {
+				VocaDTO tmpVoca = tmpItr.next();
+				if(tmpVoca.getWord().equals(word) || tmpVoca.getKormean().equals(word)) {
+					System.out.println(word + "는 이미 등록된 단어입니다.");
+					
+					//이미 등록된 해당 단어를 보여주기
+					System.out.println("==================등록된 단어정보====================");
+					System.out.println("영단어 : " + tmpVoca.getWord());
+					System.out.println("한국어뜻 : " + tmpVoca.getKormean());
+					System.out.println("영어정의 : " + tmpVoca.getDefinition());
+					System.out.print("유의어 : ");
+					for (String s : tmpVoca.getSimilar()) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+					System.out.println("==================================================");
+					System.out.println();
+					
+					return;
+				}
+			}	
+			
+			//한국어뜻 입력 유효성검사	
+			String kormean = "";
+			while(true) {
+				
+				System.out.print("한국어뜻 입력 : ");
+				kormean = sc.nextLine().trim(); 
+				
+				if(kormean.length() == 0) {
+					System.out.println("잘못 입력하셨습니다. 한국어뜻를 다시 입력해주세요.");
+				}
+				else if(kormean.length() > 0) {
+					break; //한국어뜻입력반복문을 끝낸다
+				}
+			}
+			
+			//영영정의 입력 유효성검사	
+			String engdefinition = "";
+			while(true) {
+				
+				System.out.print("영어정의 입력 : ");
+				engdefinition = sc.nextLine().trim(); 
+				
+				if(engdefinition.length() == 0) {
+					System.out.println("잘못 입력하셨습니다. 영어정의를 다시 입력해주세요.");
+				}
+				else if(engdefinition.length() > 0) {
+					break; //영어정의입력반복문을 끝낸다
+				}
+			}
+			
+			//유의어1 입력 유효성검사	
+			String similar1 = "";
+			while(true) {
+				
+				System.out.print("첫번째 유의어 입력 : ");
+				similar1 = sc.nextLine().trim(); 
+				
+				if(similar1.length() == 0) {
+					System.out.println("잘못 입력하셨습니다. 첫번째 유의어를 다시 입력해주세요.");
+				}
+				else if(similar1.length() > 0) {
+					break; //유의어1입력반복문을 끝낸다
+				}
+			}
+			
+			//유의어2 입력 유효성검사	
+			String similar2 = "";
+			while(true) {
+				
+				System.out.print("두번째 유의어 입력 : ");
+				similar2 = sc.nextLine().trim(); 
+				
+				if(similar2.length() == 0) {
+					System.out.println("잘못 입력하셨습니다. 두번째 유의어를 다시 입력해주세요.");
+				}
+				else if(similar2.length() > 0) {
+					break; //유의어2입력반복문을 끝낸다
+				}
+			}
 
 		VocaDTO voca = new VocaDTO(word, kormean, engdefinition, new String[] { similar1, similar2 });
 		vocalist.add(voca);
@@ -198,7 +252,10 @@ public class VocaManager {
         System.out.println();
         System.out.println("==================================================");
 
-	}
+	}//addWord()		
+			
+
+		
 
 	// 단어 삭제
 	public void deleteWord() {
