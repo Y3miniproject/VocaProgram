@@ -180,6 +180,8 @@ public class VocaManager {
 			System.out.print("삭제할 단어를 입력하세요(영단어/한국어뜻) : ");
 			String input = sc.nextLine();
 
+			
+			boolean removedSuccess = false;
 			while(itr.hasNext()) {
 				
 				VocaDTO willRemoved = itr.next();
@@ -187,11 +189,15 @@ public class VocaManager {
 				if(willRemoved.getWord().equals(input) || willRemoved.getKormean().equals(input)) {
 					itr.remove();
 					System.out.println(input + "이/가 단어장에서 삭제되었습니다.");
+					
+					removedSuccess = true;
 				}
 			}
 			
-			
-			System.out.println(input + " 은/는 단어장에 등록되지 않은 단어입니다.");
+			//삭제 완료한 뒤에 함께 출력되고있는 문제해결 - 삭제완료시에는 출력되지 않도록 조건추가
+			if(!removedSuccess) {
+				System.out.println(input + " 은/는 단어장에 등록되지 않은 단어입니다.");
+			}
 			
 			
 			System.out.print("단어를 더 삭제하시겠습니까?(y/n) : ");
