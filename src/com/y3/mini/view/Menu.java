@@ -66,6 +66,7 @@ public class Menu {
 			String n = sc.nextLine();
 			if (n.equals("7")) {
 				System.out.println("프로그램을 종료하겠습니다.");
+				sc.close(); //프로그램 종료 직전 리소스 닫기
 				break;
 			}
 			switch (n) {
