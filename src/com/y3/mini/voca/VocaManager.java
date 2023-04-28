@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class VocaManager {
 
-//	public List<VocaDTO> vocalist = new ArrayList<>();
 	public HashSet<VocaDTO> vocalist = new HashSet<>();
 	Scanner sc = new Scanner(System.in);
 	
@@ -111,7 +110,6 @@ public class VocaManager {
 	                for (String s : voca.getSimilar()) {
 	                    System.out.print(s + " ");
 	                }
-//	                break;  //검색어와 일치하는 단어 전부를 출력하기 위해서 주석처리
 	            }
 	            System.out.println();
 	        }
@@ -136,10 +134,32 @@ public class VocaManager {
 	
 
 	// 단어추가 - 수정필요
+	
+	
+	//중복저장 안되도록 
+	//1) 중복된 영단어 입력시 안내문 출력과 함께 메소드를 나가도록 return (추후 반복기능 추가할경우 break하여 영단어를 다시 입력하게함)
 	public void addWord() {
 	
 		System.out.print("영단어 입력 : ");
 		String word = sc.nextLine();
+		
+//		if()
+			
+			
+		HashSet<VocaDTO> tmpHashSet = new HashSet<VocaDTO>();
+        tmpHashSet.addAll(vocalist);
+        Iterator<VocaDTO> tmpItr = tmpHashSet.iterator();
+        while(tmpItr.hasNext()) {
+        	VocaDTO tmpVoca = tmpItr.next();
+        	if(tmpVoca.getWord().equals(word) || tmpVoca.getKormean().equals(word)) {
+        		System.out.println(word + "는 이미 등록된 단어입니다.");
+        		showVoca();
+        	}
+        }	
+			
+			//수정하기 전에 깃허브에서 최신버전 받기
+			
+			
 	
 		System.out.print("한국어 뜻 입력 : ");
 		String kormean = sc.nextLine();
