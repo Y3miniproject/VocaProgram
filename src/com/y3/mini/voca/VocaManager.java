@@ -137,15 +137,13 @@ public class VocaManager {
 	
 	
 	//중복저장 안되도록 
-	//1) 중복된 영단어 입력시 안내문 출력과 함께 메소드를 나가도록 return (추후 반복기능 추가할경우 break하여 영단어를 다시 입력하게함)
+	//중복된 영단어 입력시 안내문 출력과 함께 메소드를 나가도록 return 
+	//(추후 반복기능 추가할경우 break하여 영단어를 다시 입력하게함)
 	public void addWord() {
 	
 		System.out.print("영단어 입력 : ");
 		String word = sc.nextLine();
 		
-//		if()
-			
-			
 		HashSet<VocaDTO> tmpHashSet = new HashSet<VocaDTO>();
         tmpHashSet.addAll(vocalist);
         Iterator<VocaDTO> tmpItr = tmpHashSet.iterator();
@@ -153,14 +151,25 @@ public class VocaManager {
         	VocaDTO tmpVoca = tmpItr.next();
         	if(tmpVoca.getWord().equals(word) || tmpVoca.getKormean().equals(word)) {
         		System.out.println(word + "는 이미 등록된 단어입니다.");
-        		showVoca();
+        		
+                //이미 등록된 해당 단어를 보여주기
+        		System.out.println("==================등록된 단어정보====================");
+        		System.out.println("영단어 : " + tmpVoca.getWord());
+				System.out.println("한국어뜻 : " + tmpVoca.getKormean());
+				System.out.println("영어정의 : " + tmpVoca.getDefinition());
+				System.out.print("유의어 : ");
+                for (String s : tmpVoca.getSimilar()) {
+                    System.out.print(s + " ");
+                }
+                System.out.println();
+                System.out.println("==================================================");
+                System.out.println();
+        		
+        		return;
         	}
         }	
-			
-			//수정하기 전에 깃허브에서 최신버전 받기
-			
-			
-	
+        
+        	
 		System.out.print("한국어 뜻 입력 : ");
 		String kormean = sc.nextLine();
 
@@ -178,9 +187,16 @@ public class VocaManager {
 
 		System.out.println("단어 등록 완료!");
 
-		System.out.println("---새로 추가된 단어---");
-		System.out.println(voca.toString());
-		System.out.println("-------------------");
+		System.out.println("==================추가된 단어정보====================");
+		System.out.println("영단어 : " + voca.getWord());
+		System.out.println("한국어뜻 : " + voca.getKormean());
+		System.out.println("영어정의 : " + voca.getDefinition());
+		System.out.print("유의어 : ");
+        for (String s : voca.getSimilar()) {
+            System.out.print(s + " ");
+        }
+        System.out.println();
+        System.out.println("==================================================");
 
 	}
 
@@ -214,7 +230,6 @@ public class VocaManager {
 				}
 			}
 			
-			//삭제 완료한 뒤에 함께 출력되고있는 문제해결 - 삭제완료시에는 출력되지 않도록 조건추가
 			if(!removedSuccess) {
 				System.out.println(input + " 은/는 단어장에 등록되지 않은 단어입니다.");
 			}

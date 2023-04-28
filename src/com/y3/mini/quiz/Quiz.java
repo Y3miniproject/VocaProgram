@@ -11,7 +11,7 @@ import com.y3.mini.voca.VocaDTO;
 import com.y3.mini.voca.VocaManager;
 
 public class Quiz {
-	Scanner sc= new Scanner(System.in);;
+	Scanner sc= new Scanner(System.in);
 	public void playQuiz(String id,UserManager user,VocaManager voca) {
 	
 		int score = 0;			// 현재 점수
