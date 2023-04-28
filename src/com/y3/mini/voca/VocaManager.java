@@ -34,7 +34,22 @@ public class VocaManager {
 
 		if (vocalist.isEmpty()) {
 			System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
-			return;
+			
+			//사용자 선택에 따라 단어추가 메소드를 호출
+			while(true) {
+				System.out.print("단어를 등록하시겠습니까?(y/n) : ");
+				String answer = sc.nextLine();
+				if(answer.equalsIgnoreCase("y")) {
+					addWord();
+					return;
+				} else if(answer.equalsIgnoreCase("n")) {
+					return;
+				} 
+				else {
+					System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+				}
+			}
+			
 		}
 		
 
@@ -56,7 +71,6 @@ public class VocaManager {
 				System.out.println("-----------------");
 			}
 		}
-
 	}
 
 	
@@ -64,16 +78,43 @@ public class VocaManager {
 	public void searchWord() {
 	    while(true) {
 	        Iterator<VocaDTO> itr = vocalist.iterator();
+	        
 	        if (!itr.hasNext()) {
 	            System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
-	            return;
+	            
+	            //사용자 선택에 따라 단어추가 메소드를 호출
+				while(true) {
+					System.out.print("단어를 등록하시겠습니까?(y/n) : ");
+					String answer = sc.nextLine();
+					if(answer.equalsIgnoreCase("y")) {
+						addWord();
+						return;
+					} else if(answer.equalsIgnoreCase("n")) {
+						return;
+					} 
+					else {
+						System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+					}
+				}
+	            
 	        }
-
-	        System.out.print("검색할 단어를 입력하세요(영단어/한국어뜻) : ");
-	        String word = sc.nextLine();
-	        System.out.println();
-
-
+	        
+	        //검색할단어 입력에 유효성검사 추가	
+			String word = "";
+			while(true) {
+				
+				System.out.print("검색할 단어를 입력하세요(영단어/한국어뜻) : ");
+				word = sc.nextLine().trim(); 
+				
+				if(word.length() == 0) {
+					System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+				}
+				else if(word.length() > 0) {
+					break;
+				}
+			}
+	        
+	        
 	        //전체 검색결과 수의 출력을 위해 임시HashSet 생성하여 복제
 	        int tmpCount = 0;
 	        HashSet<VocaDTO> tmpHashSet = new HashSet<VocaDTO>();
@@ -114,6 +155,22 @@ public class VocaManager {
 	        
 	        if(!isRegistered) {
 	            System.out.println(word + " 은/는 단어장에 등록되지 않은 단어입니다.");
+	            
+	            //사용자 선택에 따라 단어추가 메소드를 호출
+				while(true) {
+					System.out.print("단어를 등록하시겠습니까?(y/n) : ");
+					String answer = sc.nextLine();
+					if(answer.equalsIgnoreCase("y")) {
+						addWord();
+						return;
+					} else if(answer.equalsIgnoreCase("n")) {
+						return;
+					} 
+					else {
+						System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+					}
+				}
+				
 	        }
 	        
 	        System.out.println("=============================================");
@@ -265,7 +322,25 @@ public class VocaManager {
 			
 			if (!itr.hasNext()) {
 				System.out.println("현재 단어장에 등록된 단어가 없습니다. 단어를 등록해주세요.");
-				return;
+				
+	            //사용자 선택에 따라 단어추가 메소드를 호출
+				while(true) {
+					System.out.print("단어를 등록하시겠습니까?(y/n) : ");
+					String answer = sc.nextLine();
+					if(answer.equalsIgnoreCase("y")) {
+						addWord();
+						return;
+					} else if(answer.equalsIgnoreCase("n")) {
+						return;
+					} 
+					else {
+						System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+					}
+				}
+
+	            
+	            
+	            
 			}
 			
 			showVoca();
