@@ -37,7 +37,22 @@ public class UserManager {
     }
 	
 	// 로그인 성공 여부를 반환하는 메소드 
-	public boolean signIn(String id, String pwd) {
+//	public boolean signIn(String id, String pwd) {
+//		UserDTO user = userInfo.get(id);
+//		if(user == null) {
+//			System.out.println("해당 아이디가 존재하지 않습니다.");
+//			return false;
+//		} else if (!user.getPwd().equals(pwd)) {
+//			System.out.println("비밀번호가 일치하지 않습니다.");
+//			return false;
+//		} else {
+//			System.out.println(user.getName() + "님, 로그인에 성공하셨습니다. ");
+//		return true;
+//		}
+//	}
+	
+    public boolean signIn(String id, String pwd) {
+		
 		UserDTO user = userInfo.get(id);
 		if(user == null) {
 			System.out.println("해당 아이디가 존재하지 않습니다.");
@@ -50,6 +65,7 @@ public class UserManager {
 		return true;
 		}
 	}
+	
 	
 	// 회원가입 기능을 위한 signUp() 메소드를 작성하여 사용자 정보를 저장하고 회원가입 결과를 반환
 	public boolean signUp(String id, String pwd, String name) {
