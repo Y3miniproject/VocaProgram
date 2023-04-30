@@ -72,7 +72,7 @@ public class VocaManager {
 			
 			for(VocaDTO v : sortedList) {
 				System.out.println(v.toString());
-				System.out.println("--------------------------------------------------------------------------------------------");
+				System.out.println("-------------------------------------------------------------------------------------------");
 			}
 		}
 		System.out.println();
@@ -97,9 +97,9 @@ public class VocaManager {
 	        //검색할단어 입력에 유효성검사 추가	
 			String word = "";
 			while(true) {
-				
+				System.out.println();
 				System.out.print("검색할 단어를 입력하세요(영단어/한국어뜻) : ");
-				word = sc.nextLine().trim(); 
+				word = sc.nextLine().trim().toLowerCase(); 
 				
 				if(word.length() == 0) {
 					System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
@@ -461,7 +461,7 @@ public class VocaManager {
 		
 		while(true) {
 			System.out.println();
-			System.out.print("단어를 등록하시겠습니까?(y/n) : ");
+			System.out.print("단어를 등록하시겠습니까?(Y/N) : ");
 			String answer = sc.nextLine().trim();
 			if(answer.equalsIgnoreCase("y")) {
 				addWord();
@@ -481,7 +481,7 @@ public class VocaManager {
 	public boolean askRepeat(String methodName) {
 		while(true) {
 			System.out.println();
-			System.out.print("계속 " + methodName + "하시겠습니까?(y/n) : ");
+			System.out.print("계속 " + methodName + "하시겠습니까?(Y/N) : ");
 			String s = sc.nextLine();
 			System.out.println();
 			

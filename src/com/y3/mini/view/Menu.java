@@ -17,14 +17,12 @@ public class Menu {
 	boolean isLogin; // 로그인 성공여부
 	
 	
-	public static final String black    = "\u001B[30m" ;
     public static final String red      = "\u001B[31m" ;
     public static final String green    = "\u001B[32m" ;
     public static final String yellow   = "\u001B[33m" ;
     public static final String blue     = "\u001B[34m" ;
     public static final String purple   = "\u001B[35m" ;
     public static final String cyan     = "\u001B[36m" ;
-    public static final String white     = "\u001B[37m" ;
     public static final String exit     = "\u001B[0m" ;
 	
 
@@ -99,8 +97,14 @@ public class Menu {
 				if (!user.signUp(id, pwd, name)) {
 				System.out.println("회원가입에 실패했습니다.");
 				 }
+				
+			} else if (n.equals("3")) {
+				System.out.println();
+				System.out.println("단어장이 종료됩니다.");
+				sc.close(); //프로그램 종료 직전 리소스 닫기
+				return;
+			}
 		}
-	}
 
 		while (true) {
 			System.out.println();
@@ -112,16 +116,20 @@ public class Menu {
 			System.out.println("┃  4. 단어 추가   ┃");
 			System.out.println("┃  5. 단어 삭제   ┃");
 			System.out.println("┃  6. 퀴즈 풀기   ┃");
-			System.out.println("┃  7. 종료하기    ┃");
+			System.out.println("┃  7. 로그아웃    ┃");
 			System.out.println("┗━━━━━━━━━━━━━━━┛"+exit);
 			System.out.println();
 			System.out.print("메뉴 번호 : ");
 			
 			String n = sc.nextLine();
 			if (n.equals("7")) {
-				System.out.println("단어장이 종료됩니다.");
-				sc.close(); //프로그램 종료 직전 리소스 닫기
-				break;
+				System.out.println();
+//				System.out.println("단어장이 종료됩니다.");
+//				sc.close(); //프로그램 종료 직전 리소스 닫기
+				System.out.println("로그아웃 되어 메인 메뉴로 이동합니다.");
+				System.out.println();
+				mainMenu();
+				return;
 			}
 			switch (n) {
 				case "1" : user.showMypage(id); break;
