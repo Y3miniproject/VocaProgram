@@ -159,26 +159,8 @@ public class VocaManager {
 				
 	        }
 	        
-	        
 	        askRepeat("검색");
 	        if(!answerY) return;
-	        
-//	        while(true) {
-//		        System.out.println();
-//		        System.out.print("계속 검색하시겠습니까?(y/n) : ");
-//		        String s = sc.nextLine();
-//		        System.out.println();
-//		        
-//		        if(s.equalsIgnoreCase("y")) {
-//		        	break;
-//		        } else if(s.equalsIgnoreCase("n")) {
-//		        	return;
-//		        } 
-//		        else {
-//		        	System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
-//		        }
-//	        }
-	        
 	    }
 	}
 	
@@ -186,6 +168,11 @@ public class VocaManager {
 	// 단어추가
 	public void addWord() {
 		
+		String exitKeyword = "*";
+		System.out.println();
+		System.out.println("※원하는 단어를 추가해보세요. 종료를 원하시는 경우 언제든 *를 입력하시어 현재 메뉴를 나가실 수 있습니다.");
+		
+		label:
 		while(true) {
 			
 			//영단어 입력 유효성검사
@@ -194,6 +181,12 @@ public class VocaManager {
 				
 				System.out.print("영단어 입력 : ");
 				word = sc.nextLine().trim().toLowerCase(); //대문자 입력시에도 단어장에는 소문자로 저장되도록함 
+				
+				if(word.equals("*")) {
+					System.out.println();
+					System.out.println("단어 추가를 종료합니다.");
+					return;
+				}
 				
 				if(word.length() == 0) {
 					System.out.println();
@@ -222,7 +215,7 @@ public class VocaManager {
 			while(tmpItr.hasNext()) {
 				VocaDTO tmpVoca = tmpItr.next();
 				if(tmpVoca.getWord().equals(word)) {
-					System.out.println(word + "는 이미 등록된 단어입니다.");
+					System.out.println(word + "은/는 이미 등록된 단어입니다.");
 					
 					//이미 등록된 해당 단어를 보여주기
 					System.out.println("==================등록된 단어정보====================");
@@ -237,7 +230,9 @@ public class VocaManager {
 					System.out.println("==================================================");
 					System.out.println();
 					
-					return;
+					askRepeat("추가"); 
+					if(answerY) continue label;
+					if(!answerY) return;
 				}
 			}	
 			
@@ -248,17 +243,23 @@ public class VocaManager {
 				System.out.print("한국어뜻 입력 : ");
 				kormean = sc.nextLine().trim(); 
 				
+				if(kormean.equals("*")) {
+					System.out.println();
+					System.out.println("단어 추가를 종료합니다.");
+					return;
+				}
+				
 				if(kormean.length() == 0) {
 					System.out.println();
 					System.out.println("잘못 입력하셨습니다. 한국어뜻을 다시 입력해주세요.");
 					System.out.println();
 				}
 
+				//빈문자열이 아니면서 한글일 경우에만 한국어뜻 입력 반복을 종료 
 				else if(kormean.length() > 0) {
 					if('\uAC00' < kormean.charAt(0) && kormean.charAt(0) < '\uD7AF') {
 						break;
 					}
-					//빈문자열이 아니면서 한글일 경우에만 한국어뜻 입력 반복을 종료 
 					else {
 						System.out.println();
 						System.out.println("잘못 입력하셨습니다. 한국어뜻을 다시 입력해주세요.");
@@ -275,6 +276,12 @@ public class VocaManager {
 				
 				System.out.print("영어정의 입력 : ");
 				engdefinition = sc.nextLine().trim(); 
+				
+				if(engdefinition.equals("*")) {
+					System.out.println();
+					System.out.println("단어 추가를 종료합니다.");
+					return;
+				}
 				
 				if(engdefinition.length() == 0) {
 					System.out.println();
@@ -304,6 +311,12 @@ public class VocaManager {
 				System.out.print("첫번째 유의어 입력 : ");
 				similar1 = sc.nextLine().trim().toLowerCase(); //대문자 입력시에도 단어장에는 소문자로 저장되도록함 
 				
+				if(similar1.equals("*")) {
+					System.out.println();
+					System.out.println("단어 추가를 종료합니다.");
+					return;
+				}
+				
 				if(similar1.length() == 0) {
 					System.out.println("잘못 입력하셨습니다. 첫번째 유의어를 다시 입력해주세요.");
 				}
@@ -326,6 +339,12 @@ public class VocaManager {
 				
 				System.out.print("두번째 유의어 입력 : ");
 				similar2 = sc.nextLine().trim().toLowerCase(); //대문자 입력시에도 단어장에는 소문자로 저장되도록함 
+				
+				if(similar2.equals("*")) {
+					System.out.println();
+					System.out.println("단어 추가를 종료합니다.");
+					return;
+				}
 				
 				if(similar2.length() == 0) {
 					System.out.println("잘못 입력하셨습니다. 두번째 유의어를 다시 입력해주세요.");
@@ -363,22 +382,6 @@ public class VocaManager {
 			
 			
 			askRepeat("추가"); if(!answerY) return;
-//	        while(true) {
-//		        System.out.println();
-//		        System.out.print("계속 추가하시겠습니까?(y/n) : ");
-//		        String s = sc.nextLine();
-//		        System.out.println();
-//		        
-//		        if(s.equalsIgnoreCase("y")) {
-//		        	break;
-//		        } else if(s.equalsIgnoreCase("n")) {
-//		        	return;
-//		        } 
-//		        else {
-//		        	System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
-//		        }
-//	        }
-	        
 		}
 		
 	}//addWord()		
@@ -414,6 +417,7 @@ public class VocaManager {
 			}
 			String randomStr = sb.toString();
 			
+			
 			System.out.println("※등록된 단어의 일괄 삭제가 가능합니다. 단어장 비우기를 원하시면 [ " + randomStr + " ]를 입력하세요.");   
 			System.out.print("삭제할 단어 입력(영단어/한국어뜻) : ");
 			String input = sc.nextLine();
@@ -445,24 +449,7 @@ public class VocaManager {
 				System.out.println();
 			}
 			
-			
 			askRepeat("삭제"); if(!answerY) return;
-
-//	        while(true) {
-//		        System.out.println();
-//		        System.out.print("계속 삭제하시겠습니까?(y/n) : ");
-//		        String s = sc.nextLine();
-//		        System.out.println();
-//		        
-//		        if(s.equalsIgnoreCase("y")) {
-//		        	break;
-//		        } else if(s.equalsIgnoreCase("n")) {
-//		        	return;
-//		        } 
-//		        else {
-//		        	System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
-//		        }
-//	        }
 		}
 
 	}//deleteWord()
@@ -503,6 +490,7 @@ public class VocaManager {
 				break;
 			} else if(s.equalsIgnoreCase("n")) {
 				answerY = false;
+				System.out.println("메뉴로 이동합니다.");
 				return answerY;
 			} 
 			else {
@@ -512,8 +500,6 @@ public class VocaManager {
 		return answerY;
 	}
 	
-	
-
 }
 
 
