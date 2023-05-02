@@ -103,6 +103,7 @@ public class Menu {
 				if (!user.signUp(id, pwd, name)) {
 				System.out.println("회원가입에 실패했습니다.");
 				 }
+				
 		}
 	}
 
